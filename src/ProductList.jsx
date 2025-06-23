@@ -263,7 +263,11 @@ function ProductList({ onHomeClick }) {
             ...prevState, // Spread the previous state to retain existing entries
             [product.name]: true, // Set the current product's name as a key with value 'true' to mark it as added
         }));
-        };
+    
+    const calculateTotalQuantity = () => {
+        return CartItems ? CartItems.reduce((total, item) => total + item.quantity, 0) : 0;
+         };
+    };
 
     return (
         <div>
@@ -297,8 +301,8 @@ function ProductList({ onHomeClick }) {
                                 <img className='product-image' src={plant.image} alt={plant.name} />
                                 <div className='product-title'>{plant.name}</div>
                                 <div className='product-description'>{plant.description}</div>
-                                <div className='product-cost'>${plant.cost}</div>
-                                <button className='product-button' onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+                                <div className='product-cost'>{plant.cost}</div>
+                                <button className='product-button' onClick={handleAddToCart(plant)}>Add to Cart</button>
                             </div>
                         ))}
                         </div>                   
