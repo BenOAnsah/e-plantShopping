@@ -283,24 +283,26 @@ function ProductList({ onHomeClick }) {
 
                 </div>
                 <div style={styleObjUl}>
-                    <div> <a href="#" onClick={(e) => handlePlantsClick(e)} style={styleA}>Plants</a></div>
-                    <div> <a href="#" onClick={(e) => handleCartClick(e)} style={styleA}><h1 className='cart'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" id="IconChangeColor" height="68" width="68"><rect width="156" height="156" fill="none"></rect><circle cx="80" cy="216" r="12"></circle><circle cx="184" cy="216" r="12"></circle><path d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8" fill="none" stroke="#faf9f9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" id="mainIconPathAttribute"></path></svg></h1></a></div>
+                    <div className='plant_heading'> <a href="#" onClick={(e) => handlePlantsClick(e)} style={styleA}>Plants</a></div>  
+                    <div className='cart'> 
+                        <span><a href="#" onClick={(e) => handleCartClick(e)} style={styleA}><h1 className='cart_symbol'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" id="IconChangeColor" height="68" width="68"><rect width="156" height="156" fill="none"></rect><circle cx="80" cy="216" r="12"></circle><circle cx="184" cy="216" r="12"></circle><path d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8" fill="none" stroke="#faf9f9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" id="mainIconPathAttribute"></path></svg></h1></a></span>
+                        <span className='cart_quantity_count'>{cartItems? cartItems.reduce((total, item) => total + item.quantity, 0):0}</span>
+                        </div>
                 </div>
             </div>
             {!showCart ? (
                 <div className="product-grid">
                     {plantsArray.map((category, index) =>(
                         <div key={index}>
-                            <h1><div>{category.category}</div></h1>
+                            <div><h1 className='plantname_heading'>{category.category}</h1></div>
                             <div className='product-list'>
                                 {category.plants.map((plant, plantIndex) => {const isAdded = cartItems.some(item => item.name === plant.name);
                                 return(
-                                    
                                     <div className='product-card' key={plantIndex}>
-                                        <img className='product-image' src={plant.image} alt={plant.name} />
                                         <div className='product-title'>{plant.name}</div>
-                                        <div className='product-description'>{plant.description}</div>
+                                        <img className='product-image' src={plant.image} alt={plant.name} />
                                         <div className='product-cost'>{plant.cost}</div>
+                                        <div className='product-description'>{plant.description}</div>             
                                         <button className={isAdded? 'product-button added-to-cart' : 'product-button'} onClick={() => handleAddToCart(plant)} disabled={isAdded} >{isAdded ? "Added to Cart" : "Add to Cart"}</button>
                                     </div>
                                 )})}
